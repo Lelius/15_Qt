@@ -11,26 +11,11 @@ MainGameWidget::MainGameWidget(QWidget *parent)
     ui->setupUi(this);
 
     scene = new QGraphicsScene(this);
-    pixmapBox =  scene->addPixmap(QPixmap(":/image/box.png"));
-    pixmapRestartButton = scene->addPixmap(QPixmap(":/image/reset.png"));
-    pixmapQuitButton = scene->addPixmap(QPixmap(":/image/X3.png"));
-    pixmap_1_chip = scene->addPixmap(QPixmap(":/image/1_chip.png"));
-    pixmap_2_chip = scene->addPixmap(QPixmap(":/image/2_chip.png"));
-    pixmap_3_chip = scene->addPixmap(QPixmap(":/image/3_chip.png"));
-    pixmap_4_chip = scene->addPixmap(QPixmap(":/image/4_chip.png"));
-    pixmap_5_chip = scene->addPixmap(QPixmap(":/image/5_chip.png"));
-    pixmap_6_chip = scene->addPixmap(QPixmap(":/image/6_chip.png"));
-    pixmap_7_chip = scene->addPixmap(QPixmap(":/image/7_chip.png"));
-    pixmap_8_chip = scene->addPixmap(QPixmap(":/image/8_chip.png"));
-    pixmap_9_chip = scene->addPixmap(QPixmap(":/image/9_chip.png"));
-    pixmap_10_chip = scene->addPixmap(QPixmap(":/image/10_chip.png"));
-    pixmap_11_chip = scene->addPixmap(QPixmap(":/image/11_chip.png"));
-    pixmap_12_chip = scene->addPixmap(QPixmap(":/image/12_chip.png"));
-    pixmap_13_chip = scene->addPixmap(QPixmap(":/image/13_chip.png"));
-    pixmap_14_chip = scene->addPixmap(QPixmap(":/image/14_chip.png"));
-    pixmap_15_chip = scene->addPixmap(QPixmap(":/image/15_chip.png"));
-    pixmapWellBlack = scene->addPixmap(QPixmap(":/image/well-black_380x350.png"));
-    pixmapWellWhite = scene->addPixmap(QPixmap(":/image/well-white_380x350.png"));
+    initPixmaps();
+
+    pixmapBox =  scene->addPixmap(pixmaps["box"]);
+    pixmapRestartButton = scene->addPixmap(pixmaps["restartButton"]);
+    pixmapQuitButton = scene->addPixmap(pixmaps["quitButton"]);
 
     pixmapBox->setOffset(QPointF(0, 0));
     pixmapRestartButton->setOffset(QPointF(0, 445));
@@ -58,4 +43,30 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
     {
         MainGameWidget::mousePressEvent(event);
     }
+}
+
+
+void MainGameWidget::initPixmaps()
+{
+    pixmaps["box"] = QPixmap(":/image/box.png");
+    pixmaps["restartButton"] = QPixmap(":/image/reset.png");
+    pixmaps["quitButton"] = QPixmap(":/image/X3.png");
+    pixmaps["1_chip"] = QPixmap(":/image/1_chip.png");
+    pixmaps["2_chip"] = QPixmap(":/image/2_chip.png");
+    pixmaps["3_chip"] = QPixmap(":/image/3_chip.png");
+    pixmaps["4_chip"] = QPixmap(":/image/4_chip.png");
+    pixmaps["5_chip"] = QPixmap(":/image/5_chip.png");
+    pixmaps["6_chip"] = QPixmap(":/image/6_chip.png");
+    pixmaps["7_chip"] = QPixmap(":/image/7_chip.png");
+    pixmaps["8_chip"] = QPixmap(":/image/8_chip.png");
+    pixmaps["9_chip"] = QPixmap(":/image/9_chip.png");
+    pixmaps["10_chip"] = QPixmap(":/image/10_chip.png");
+    pixmaps["11_chip"] = QPixmap(":/image/11_chip.png");
+    pixmaps["12_chip"] = QPixmap(":/image/12_chip.png");
+    pixmaps["13_chip"] = QPixmap(":/image/13_chip.png");
+    pixmaps["14_chip"] = QPixmap(":/image/14_chip.png");
+    pixmaps["15_chip"] = QPixmap(":/image/15_chip.png");
+    pixmaps["wellBlack"] = QPixmap(":/image/well-black_380x350.png");
+    pixmaps["wellWhite"] = QPixmap(":/image/well-white_380x350.png");
+
 }

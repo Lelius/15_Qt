@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGraphicsPixmapItem>
+#include <QMap>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainGemeWidget; }
@@ -17,10 +18,13 @@ public:
     ~MainGameWidget();
 
     void mousePressEvent(QMouseEvent *);
+    void initPixmaps();
 
 private:
     Ui::MainGemeWidget *ui;
     QGraphicsScene *scene;
+    QMap<QString, QPixmap> pixmaps;
+
     QGraphicsPixmapItem *pixmapBox;
     QGraphicsPixmapItem *pixmapRestartButton;
     QGraphicsPixmapItem *pixmapQuitButton;
