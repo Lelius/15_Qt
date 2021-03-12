@@ -24,26 +24,6 @@ private:
     Ui::MainGemeWidget *ui;
     QGraphicsScene *scene;
     QMap<QString, QPixmap> pixmaps;
-
-    QGraphicsPixmapItem *pixmapBox;
-    QGraphicsPixmapItem *pixmapRestartButton;
-    QGraphicsPixmapItem *pixmapQuitButton;
-    QGraphicsPixmapItem *pixmap_1_chip;
-    QGraphicsPixmapItem *pixmap_2_chip;
-    QGraphicsPixmapItem *pixmap_3_chip;
-    QGraphicsPixmapItem *pixmap_4_chip;
-    QGraphicsPixmapItem *pixmap_5_chip;
-    QGraphicsPixmapItem *pixmap_6_chip;
-    QGraphicsPixmapItem *pixmap_7_chip;
-    QGraphicsPixmapItem *pixmap_8_chip;
-    QGraphicsPixmapItem *pixmap_9_chip;
-    QGraphicsPixmapItem *pixmap_10_chip;
-    QGraphicsPixmapItem *pixmap_11_chip;
-    QGraphicsPixmapItem *pixmap_12_chip;
-    QGraphicsPixmapItem *pixmap_13_chip;
-    QGraphicsPixmapItem *pixmap_14_chip;
-    QGraphicsPixmapItem *pixmap_15_chip;
-    QGraphicsPixmapItem *pixmapWellBlack;
-    QGraphicsPixmapItem *pixmapWellWhite;
+    QMap<QString, QGraphicsPixmapItem *> pixmapItems;
 };
 #endif // MAINGEMEWIDGET_H

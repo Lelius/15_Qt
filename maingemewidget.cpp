@@ -13,13 +13,13 @@ MainGameWidget::MainGameWidget(QWidget *parent)
     scene = new QGraphicsScene(this);
     initPixmaps();
 
-    pixmapBox =  scene->addPixmap(pixmaps["box"]);
-    pixmapRestartButton = scene->addPixmap(pixmaps["restartButton"]);
-    pixmapQuitButton = scene->addPixmap(pixmaps["quitButton"]);
+    pixmapItems["box"] = scene->addPixmap(pixmaps["box"]);
+    pixmapItems["restartButton"] = scene->addPixmap(pixmaps["restartButton"]);
+    pixmapItems["quitButton"] = scene->addPixmap(pixmaps["quitButton"]);
 
-    pixmapBox->setOffset(QPointF(0, 0));
-    pixmapRestartButton->setOffset(QPointF(0, 445));
-    pixmapQuitButton->setOffset(QPointF(333, 445));
+    pixmapItems["box"]->setOffset(QPointF(0, 0));
+    pixmapItems["restartButton"]->setOffset(QPointF(0, 445));
+    pixmapItems["quitButton"]->setOffset(QPointF(333, 445));
 
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
@@ -36,7 +36,7 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        if (pixmapQuitButton->contains(event->pos()))
+        if (pixmapItems["quitButton"]->contains(event->pos()))
             MainGameWidget::close();
     }
     else
