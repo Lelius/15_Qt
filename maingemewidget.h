@@ -1,6 +1,8 @@
 #ifndef MAINGEMEWIDGET_H
 #define MAINGEMEWIDGET_H
 
+#include "BoxWithChips.h"
+
 #include <QWidget>
 #include <QGraphicsPixmapItem>
 #include <QMap>
@@ -25,5 +27,6 @@ private:
     QGraphicsScene *scene;
     QMap<QString, QPixmap> pixmaps;
     QMap<QString, QGraphicsPixmapItem *> pixmapItems;
+    BoxWithChips *boxWithChips;
 };
 #endif // MAINGEMEWIDGET_H

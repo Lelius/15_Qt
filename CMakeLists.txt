@@ -33,6 +33,8 @@ set(PROJECT_SOURCES
         maingemewidget.h
         maingemewidget.ui
         res.qrc
+        BoxWithChips.cpp
+        BoxWithChips.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

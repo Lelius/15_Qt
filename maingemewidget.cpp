@@ -11,6 +11,7 @@ MainGameWidget::MainGameWidget(QWidget *parent)
     ui->setupUi(this);
 
     scene = new QGraphicsScene(this);
+    boxWithChips = new BoxWithChips(4);
     initPixmaps();
 
     pixmapItems["box"] = scene->addPixmap(pixmaps["box"]);
@@ -28,6 +29,7 @@ MainGameWidget::MainGameWidget(QWidget *parent)
 
 MainGameWidget::~MainGameWidget()
 {
+    delete boxWithChips;
     delete ui;
 }
 
