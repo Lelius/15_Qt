@@ -2,6 +2,7 @@
 #define MAINGEMEWIDGET_H
 
 #include <QWidget>
+#include <QGraphicsPixmapItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainGemeWidget; }
@@ -15,7 +16,13 @@ public:
     MainGameWidget(QWidget *parent = nullptr);
     ~MainGameWidget();
 
+    void mousePressEvent(QMouseEvent *);
+
 private:
     Ui::MainGemeWidget *ui;
+    QGraphicsScene *scene;
+    QGraphicsPixmapItem *pixmapBox;
+    QGraphicsPixmapItem *pixmapRestartButton;
+    QGraphicsPixmapItem *pixmapQuitButton;
 };
 #endif // MAINGEMEWIDGET_H
