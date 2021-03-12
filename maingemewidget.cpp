@@ -1,14 +1,14 @@
 #include "maingemewidget.h"
 #include "./ui_maingemewidget.h"
 
-MainGemeWidget::MainGemeWidget(QWidget *parent)
+MainGameWidget::MainGameWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainGemeWidget)
 {
     ui->setupUi(this);
 }
 
-MainGemeWidget::~MainGemeWidget()
+MainGameWidget::~MainGameWidget()
 {
     delete ui;
 }

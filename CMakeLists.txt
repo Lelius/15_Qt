@@ -32,6 +32,7 @@ set(PROJECT_SOURCES
         maingemewidget.cpp
         maingemewidget.h
         maingemewidget.ui
+        res.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

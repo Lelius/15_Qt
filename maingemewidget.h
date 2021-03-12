@@ -7,13 +7,13 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainGemeWidget; }
 QT_END_NAMESPACE
 
-class MainGemeWidget : public QWidget
+class MainGameWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    MainGemeWidget(QWidget *parent = nullptr);
-    ~MainGemeWidget();
+    MainGameWidget(QWidget *parent = nullptr);
+    ~MainGameWidget();
 
 private:
     Ui::MainGemeWidget *ui;

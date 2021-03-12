@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/10_chip.png</file>
+        <file>image/11_chip.png</file>
+        <file>image/12_chip.png</file>
+        <file>image/13_chip.png</file>
+        <file>image/14_chip.png</file>
+        <file>image/15_chip.png</file>
+        <file>image/15_icon_48x48.ico</file>
+        <file>image/15_icon_48x48.png</file>
+        <file>image/1_chip.png</file>
+        <file>image/2_chip.png</file>
+        <file>image/3_chip.png</file>
+        <file>image/4_chip.png</file>
+        <file>image/5_chip.png</file>
+        <file>image/6_chip.png</file>
+        <file>image/7_chip.png</file>
+        <file>image/8_chip.png</file>
+        <file>image/9_chip.png</file>
+        <file>image/box.png</file>
+        <file>image/reset.png</file>
+        <file>image/well-black_380x350.png</file>
+        <file>image/well-white_380x350.png</file>
+        <file>image/X1.png</file>
+        <file>image/X2.png</file>
+        <file>image/X3.png</file>
+    </qresource>
+</RCC>
