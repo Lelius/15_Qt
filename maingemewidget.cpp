@@ -12,15 +12,14 @@ MainGameWidget::MainGameWidget(QWidget *parent)
 
     scene = new QGraphicsScene(this);
     boxWithChips = new BoxWithChips(4);
+
     initPixmaps();
+    addPixmapItems();
+    isVisibleWellBlack = false;
+    isVisibleWellWhite = false;
 
-    pixmapItems["box"] = scene->addPixmap(pixmaps["box"]);
-    pixmapItems["restartButton"] = scene->addPixmap(pixmaps["restartButton"]);
-    pixmapItems["quitButton"] = scene->addPixmap(pixmaps["quitButton"]);
-
-    pixmapItems["box"]->setOffset(QPointF(0, 0));
-    pixmapItems["restartButton"]->setOffset(QPointF(0, 445));
-    pixmapItems["quitButton"]->setOffset(QPointF(333, 445));
+    boxWithChips->randomChips();
+    updateGraphicsScene();
 
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
@@ -45,6 +44,58 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
     {
         MainGameWidget::mousePressEvent(event);
     }
+}
+
+
+void MainGameWidget::updateGraphicsScene()
+{
+    setOffsetMainItems();
+
+    isVisibleWellBlack ? pixmapItems["wellBlack"]->show() : pixmapItems["wellBlack"]->hide();
+    isVisibleWellBlack ? pixmapItems["wellWhite"]->show() : pixmapItems["wellWhite"]->hide();
+
+    for (int j = 0; j < boxWithChips->getYNum(); j++){
+        for (int i = 0; i < boxWithChips->getXNum(); i++){
+            int numberChip = boxWithChips->getBoxWithChips()[i + (j * boxWithChips->getXNum())];
+            if (numberChip == 0)
+                break;
+            QString nameItem = QString::number(numberChip) + "_chip";
+            pixmapItems[nameItem]->setOffset(QPointF((qreal) 15 + (105 * i), (qreal) 15 + (105 * j)));
+        }
+    }
+}
+
+
+void MainGameWidget::setOffsetMainItems()
+{
+    pixmapItems["box"]->setOffset(QPointF((qreal) 0, (qreal) 0));
+    pixmapItems["restartButton"]->setOffset(QPointF((qreal) 0, (qreal) 445));
+    pixmapItems["quitButton"]->setOffset(QPointF((qreal) 333, (qreal) 445));
+}
+
+
+void MainGameWidget::addPixmapItems()
+{
+    pixmapItems["box"] = scene->addPixmap(pixmaps["box"]);
+    pixmapItems["restartButton"] = scene->addPixmap(pixmaps["restartButton"]);
+    pixmapItems["quitButton"] = scene->addPixmap(pixmaps["quitButton"]);
+    pixmapItems["1_chip"] = scene->addPixmap(pixmaps["1_chip"]);
+    pixmapItems["2_chip"] = scene->addPixmap(pixmaps["2_chip"]);
+    pixmapItems["3_chip"] = scene->addPixmap(pixmaps["3_chip"]);
+    pixmapItems["4_chip"] = scene->addPixmap(pixmaps["4_chip"]);
+    pixmapItems["5_chip"] = scene->addPixmap(pixmaps["5_chip"]);
+    pixmapItems["6_chip"] = scene->addPixmap(pixmaps["6_chip"]);
+    pixmapItems["7_chip"] = scene->addPixmap(pixmaps["7_chip"]);
+    pixmapItems["8_chip"] = scene->addPixmap(pixmaps["8_chip"]);
+    pixmapItems["9_chip"] = scene->addPixmap(pixmaps["9_chip"]);
+    pixmapItems["10_chip"] = scene->addPixmap(pixmaps["10_chip"]);
+    pixmapItems["11_chip"] = scene->addPixmap(pixmaps["11_chip"]);
+    pixmapItems["12_chip"] = scene->addPixmap(pixmaps["12_chip"]);
+    pixmapItems["13_chip"] = scene->addPixmap(pixmaps["13_chip"]);
+    pixmapItems["14_chip"] = scene->addPixmap(pixmaps["14_chip"]);
+    pixmapItems["15_chip"] = scene->addPixmap(pixmaps["15_chip"]);
+    pixmapItems["wellBlack"] = scene->addPixmap(pixmaps["wellBlack"]);
+    pixmapItems["wellWhite"] = scene->addPixmap(pixmaps["wellWhite"]);
 }
 
 

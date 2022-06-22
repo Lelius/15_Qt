@@ -1,10 +1,12 @@
 #include "BoxWithChips.h"
 
-BoxWithChips::BoxWithChips() : xNum(4), yNum(4)
+
+BoxWithChips::BoxWithChips() : xNum(STANDARTSIZEBOX), yNum(STANDARTSIZEBOX)
 {
 	setSizeBox(getXNum() * getYNum());
 	BoxWithChips::boxWithChips = new int[getSizeBox()]{};
 }
+
 
 BoxWithChips::BoxWithChips(int value) : xNum(value), yNum(value)
 {
@@ -12,21 +14,25 @@ BoxWithChips::BoxWithChips(int value) : xNum(value), yNum(value)
 	BoxWithChips::boxWithChips = new int[getSizeBox()]{};
 }
 
+
 BoxWithChips::BoxWithChips(int x, int y) : xNum(x), yNum(y)
 {
 	setSizeBox(getXNum() * getYNum());
 	BoxWithChips::boxWithChips = new int[getSizeBox()]{};
 }
 
+
 BoxWithChips::~BoxWithChips()
 {
 	delete[] BoxWithChips::boxWithChips;
 }
 
-const int BoxWithChips::getSizeBox() const
+
+int BoxWithChips::getSizeBox() const
 {
 	return sizeBox;
 }
+
 
 bool BoxWithChips::setSizeBox(int sizeBox)
 {
@@ -37,15 +43,18 @@ bool BoxWithChips::setSizeBox(int sizeBox)
 	return true;
 }
 
-const int BoxWithChips::getXNum()
+
+int BoxWithChips::getXNum() const
 {
 	return xNum;
 }
 
-const int BoxWithChips::getYNum()
+
+int BoxWithChips::getYNum() const
 {
 	return yNum;
 }
+
 
 void BoxWithChips::randomChips()
 {
@@ -62,6 +71,7 @@ void BoxWithChips::randomChips()
 	*(boxWithChips + (getSizeBox() - 1)) = 0;
 }
 
+
 bool BoxWithChips::searchChip(int chip)
 {
 	for (int i = 0; i < getSizeBox(); ++i)
@@ -72,9 +82,10 @@ bool BoxWithChips::searchChip(int chip)
 	return false;
 }
 
+
 bool BoxWithChips::isMatchingChips()
 {
-	bool isMatch{ true };
+    bool isMatch{ true };
 	for (int i = 0; i < (getSizeBox() - 1); ++i)
 	{
 		int chip = *(getBoxWithChips() + i);
@@ -84,6 +95,7 @@ bool BoxWithChips::isMatchingChips()
 	return isMatch;
 }
 
+
 int BoxWithChips::getPosEmptyPlace()
 {
 	int posEmptyPlace{ 0 };
@@ -92,6 +104,7 @@ int BoxWithChips::getPosEmptyPlace()
 			posEmptyPlace = i;
 	return posEmptyPlace;
 }
+
 
 bool BoxWithChips::toTheLeftChip()
 {
@@ -109,6 +122,7 @@ bool BoxWithChips::toTheLeftChip()
 	}
 }
 
+
 bool BoxWithChips::toTheRightChip()
 {
 	int x = getPosEmptyPlace() % getXNum();
@@ -124,6 +138,7 @@ bool BoxWithChips::toTheRightChip()
 		return false;
 	}
 }
+
 
 bool BoxWithChips::toTheUpChip()
 {
@@ -141,6 +156,7 @@ bool BoxWithChips::toTheUpChip()
 	}
 }
 
+
 bool BoxWithChips::toTheBottomChip()
 {
 	int x = getPosEmptyPlace() % getXNum();
@@ -157,6 +173,7 @@ bool BoxWithChips::toTheBottomChip()
 	}
 }
 
+
 void BoxWithChips::buildInOrderChips()
 {
 	for (int i = 0; i < getSizeBox() - 1; ++i)
@@ -164,10 +181,12 @@ void BoxWithChips::buildInOrderChips()
 	boxWithChips[getSizeBox() - 1] = 0;
 }
 
+
 const int *BoxWithChips::getBoxWithChips()
 {
 	return boxWithChips;
 }
+
 
 int BoxWithChips::getChipTheGlobalNumber(int globalNumber) {
 	return boxWithChips[globalNumber];

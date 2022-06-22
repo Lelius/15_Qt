@@ -21,6 +21,9 @@ public:
 
     void mousePressEvent(QMouseEvent *);
     void initPixmaps();
+    void addPixmapItems();
+    void setOffsetMainItems();
+    void updateGraphicsScene();
 
 private:
     Ui::MainGemeWidget *ui;
@@ -28,5 +31,7 @@ private:
     QMap<QString, QPixmap> pixmaps;
     QMap<QString, QGraphicsPixmapItem *> pixmapItems;
     BoxWithChips *boxWithChips;
+    bool isVisibleWellBlack;
+    bool isVisibleWellWhite;
 };
 #endif // MAINGEMEWIDGET_H
