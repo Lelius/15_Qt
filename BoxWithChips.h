@@ -20,6 +20,7 @@ public:
   void randomChips();
   bool searchChip(int);
   bool isMatchingChips();
+  int getPosChip(int);
   int getPosEmptyPlace();
   bool toTheLeftChip();
   bool toTheRightChip();

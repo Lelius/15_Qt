@@ -39,6 +39,31 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
     {
         if (pixmapItems["quitButton"]->contains(event->pos()))
             MainGameWidget::close();
+        if (pixmapItems["restartButton"]->contains(event->pos())){
+            boxWithChips->randomChips();
+        }
+        for (int i = 0; i < 15; i++){
+            QString numbChip = QString::number(i + 1) + "_chip";
+            if (pixmapItems[numbChip]->contains(event->pos())){
+                //
+                int posEmpty = boxWithChips->getPosEmptyPlace();
+                int posChip = boxWithChips->getPosChip(i + 1);
+
+                if (posEmpty == (posChip - 1)){
+                    boxWithChips->toTheLeftChip();
+                }
+                if (posEmpty == (posChip + 1)){
+                    boxWithChips->toTheRightChip();
+                }
+                if (posEmpty == (posChip - boxWithChips->getXNum())){
+                    boxWithChips->toTheUpChip();
+                }
+                if (posEmpty == (posChip + boxWithChips->getXNum())){
+                    boxWithChips->toTheBottomChip();
+                }
+            }
+        }
+        updateGraphicsScene();
     }
     else
     {
@@ -58,7 +83,7 @@ void MainGameWidget::updateGraphicsScene()
         for (int i = 0; i < boxWithChips->getXNum(); i++){
             int numberChip = boxWithChips->getBoxWithChips()[i + (j * boxWithChips->getXNum())];
             if (numberChip == 0)
-                break;
+                continue;
             QString nameItem = QString::number(numberChip) + "_chip";
             pixmapItems[nameItem]->setOffset(QPointF((qreal) 15 + (105 * i), (qreal) 15 + (105 * j)));
         }
@@ -71,6 +96,8 @@ void MainGameWidget::setOffsetMainItems()
     pixmapItems["box"]->setOffset(QPointF((qreal) 0, (qreal) 0));
     pixmapItems["restartButton"]->setOffset(QPointF((qreal) 0, (qreal) 445));
     pixmapItems["quitButton"]->setOffset(QPointF((qreal) 333, (qreal) 445));
+    pixmapItems["wellBlack"]->setOffset(QPointF((qreal) 35, (qreal) 45));
+    pixmapItems["wellWhite"]->setOffset(QPointF((qreal) 35, (qreal) 45));
 }
 
 

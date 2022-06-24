@@ -96,6 +96,16 @@ bool BoxWithChips::isMatchingChips()
 }
 
 
+int BoxWithChips::getPosChip(int chip)
+{
+    int posChip{ 0 };
+    for (int i = 0; i < getSizeBox(); ++i)
+        if (*(boxWithChips + i) == chip)
+            posChip = i;
+    return posChip;
+}
+
+
 int BoxWithChips::getPosEmptyPlace()
 {
 	int posEmptyPlace{ 0 };
