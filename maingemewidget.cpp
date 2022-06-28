@@ -1,5 +1,6 @@
 #include "maingemewidget.h"
 #include "./ui_maingemewidget.h"
+#include "keypressfilter.h"
 
 #include <QGraphicsPixmapItem>
 #include <QMouseEvent>
@@ -15,21 +16,64 @@ MainGameWidget::MainGameWidget(QWidget *parent)
 
     initPixmaps();
     addPixmapItems();
-    isVisibleWellBlack = false;
-    isVisibleWellWhite = false;
 
-    boxWithChips->randomChips();
-    updateGraphicsScene();
+    startNewGameScene();
 
     ui->graphicsView->setScene(scene);
+    KeyPressFilter *keyPressFilter = new KeyPressFilter(ui->graphicsView);
+    ui->graphicsView->installEventFilter(keyPressFilter);
+    connect(keyPressFilter, &KeyPressFilter::keyPressSignal, this, &MainGameWidget::keyPressArrows);
     ui->graphicsView->show();
-
 }
 
 MainGameWidget::~MainGameWidget()
 {
     delete boxWithChips;
     delete ui;
+}
+
+
+void MainGameWidget::keyPressArrows(int arrow)
+{
+    switch (arrow) {
+    case Qt::Key_Left:
+        boxWithChips->toTheLeftChip();
+        break;
+    case Qt::Key_Right:
+        boxWithChips->toTheRightChip();
+        break;
+    case Qt::Key_Up:
+        boxWithChips->toTheUpChip();
+        break;
+    case Qt::Key_Down:
+        boxWithChips->toTheBottomChip();
+        break;
+    default:
+        break;
+    }
+    setOffsetChipsItems();
+}
+
+
+void MainGameWidget::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_A:
+        boxWithChips->toTheLeftChip();
+        break;
+    case Qt::Key_D:
+        boxWithChips->toTheRightChip();
+        break;
+    case Qt::Key_W:
+        boxWithChips->toTheUpChip();
+        break;
+    case Qt::Key_S:
+        boxWithChips->toTheBottomChip();
+        break;
+    default:
+        break;
+    }
+    setOffsetChipsItems();
 }
 
 
@@ -63,22 +107,27 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
                 }
             }
         }
-        updateGraphicsScene();
+        setOffsetChipsItems();
     }
-    else
+    /*else
     {
         MainGameWidget::mousePressEvent(event);
-    }
+    }*/
 }
 
 
-void MainGameWidget::updateGraphicsScene()
+void MainGameWidget::startNewGameScene()
 {
     setOffsetMainItems();
+    boxWithChips->randomChips();
+    setOffsetChipsItems();
+    pixmapItems["wellBlack"]->hide();
+    pixmapItems["wellWhite"]->hide();
+}
 
-    isVisibleWellBlack ? pixmapItems["wellBlack"]->show() : pixmapItems["wellBlack"]->hide();
-    isVisibleWellBlack ? pixmapItems["wellWhite"]->show() : pixmapItems["wellWhite"]->hide();
 
+void MainGameWidget::setOffsetChipsItems()
+{
     for (int j = 0; j < boxWithChips->getYNum(); j++){
         for (int i = 0; i < boxWithChips->getXNum(); i++){
             int numberChip = boxWithChips->getBoxWithChips()[i + (j * boxWithChips->getXNum())];

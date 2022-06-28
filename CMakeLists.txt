@@ -35,6 +35,8 @@ set(PROJECT_SOURCES
         res.qrc
         BoxWithChips.cpp
         BoxWithChips.h
+        keypressfilter.h
+        keypressfilter.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

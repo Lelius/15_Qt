@@ -19,11 +19,16 @@ public:
     MainGameWidget(QWidget *parent = nullptr);
     ~MainGameWidget();
 
-    void mousePressEvent(QMouseEvent *);
     void initPixmaps();
     void addPixmapItems();
     void setOffsetMainItems();
-    void updateGraphicsScene();
+    void setOffsetChipsItems();
+    void startNewGameScene();
+
+protected:
+    void mousePressEvent(QMouseEvent *);
+    void keyPressEvent(QKeyEvent *);
+    void keyPressArrows(int);
 
 private:
     Ui::MainGemeWidget *ui;
@@ -31,7 +36,5 @@ private:
     QMap<QString, QPixmap> pixmaps;
     QMap<QString, QGraphicsPixmapItem *> pixmapItems;
     BoxWithChips *boxWithChips;
-    bool isVisibleWellBlack;
-    bool isVisibleWellWhite;
 };
 #endif // MAINGEMEWIDGET_H
