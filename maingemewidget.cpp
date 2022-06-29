@@ -20,10 +20,11 @@ MainGameWidget::MainGameWidget(QWidget *parent)
     startNewGameScene();
 
     ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
+
     KeyPressFilter *keyPressFilter = new KeyPressFilter(ui->graphicsView);
     ui->graphicsView->installEventFilter(keyPressFilter);
-    connect(keyPressFilter, &KeyPressFilter::keyPressSignal, this, &MainGameWidget::keyPressArrows);
-    ui->graphicsView->show();
+    connect(keyPressFilter, &KeyPressFilter::keyPressSignal, this, &MainGameWidget::keyPressFilter);
 }
 
 MainGameWidget::~MainGameWidget()
@@ -33,9 +34,9 @@ MainGameWidget::~MainGameWidget()
 }
 
 
-void MainGameWidget::keyPressArrows(int arrow)
+void MainGameWidget::keyPressFilter(int key)
 {
-    switch (arrow) {
+    switch (key) {
     case Qt::Key_Left:
         boxWithChips->toTheLeftChip();
         break;
@@ -48,6 +49,18 @@ void MainGameWidget::keyPressArrows(int arrow)
     case Qt::Key_Down:
         boxWithChips->toTheBottomChip();
         break;
+    case Qt::Key_Space:
+        startNewGameScene();
+        break;
+    case Qt::Key_Escape:
+        MainGameWidget::close();
+        break;
+    case Qt::Key_Enter:
+        startNewGameScene();
+        break;
+    case Qt::Key_Return:
+        startNewGameScene();
+        break;
     default:
         break;
     }
@@ -57,23 +70,7 @@ void MainGameWidget::keyPressArrows(int arrow)
 
 void MainGameWidget::keyPressEvent(QKeyEvent *event)
 {
-    switch (event->key()) {
-    case Qt::Key_A:
-        boxWithChips->toTheLeftChip();
-        break;
-    case Qt::Key_D:
-        boxWithChips->toTheRightChip();
-        break;
-    case Qt::Key_W:
-        boxWithChips->toTheUpChip();
-        break;
-    case Qt::Key_S:
-        boxWithChips->toTheBottomChip();
-        break;
-    default:
-        break;
-    }
-    setOffsetChipsItems();
+
 }
 
 
@@ -84,7 +81,7 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
         if (pixmapItems["quitButton"]->contains(event->pos()))
             MainGameWidget::close();
         if (pixmapItems["restartButton"]->contains(event->pos())){
-            boxWithChips->randomChips();
+            startNewGameScene();
         }
         for (int i = 0; i < 15; i++){
             QString numbChip = QString::number(i + 1) + "_chip";
@@ -109,10 +106,6 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
         }
         setOffsetChipsItems();
     }
-    /*else
-    {
-        MainGameWidget::mousePressEvent(event);
-    }*/
 }
 
 

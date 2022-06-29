@@ -28,7 +28,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *);
     void keyPressEvent(QKeyEvent *);
-    void keyPressArrows(int);
+    void keyPressFilter(int);
 
 private:
     Ui::MainGemeWidget *ui;
