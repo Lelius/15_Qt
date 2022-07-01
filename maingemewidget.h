@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QGraphicsPixmapItem>
 #include <QMap>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainGemeWidget; }
@@ -24,6 +25,8 @@ public:
     void setOffsetMainItems();
     void setOffsetChipsItems();
     void startNewGameScene();
+    void chipsShowToggle(bool);
+    void wellPicturesToggle();
 
 protected:
     void mousePressEvent(QMouseEvent *);
@@ -36,5 +39,6 @@ private:
     QMap<QString, QPixmap> pixmaps;
     QMap<QString, QGraphicsPixmapItem *> pixmapItems;
     BoxWithChips *boxWithChips;
+    QTimer *timerWellToggle;
 };
 #endif // MAINGEMEWIDGET_H

@@ -85,14 +85,13 @@ bool BoxWithChips::searchChip(int chip)
 
 bool BoxWithChips::isMatchingChips()
 {
-    bool isMatch{ true };
 	for (int i = 0; i < (getSizeBox() - 1); ++i)
 	{
 		int chip = *(getBoxWithChips() + i);
-		if (chip != (i + 1))
-			isMatch = false;
+        if (chip != (i + 1))
+            return false;
 	}
-	return isMatch;
+    return true;
 }
 
 
@@ -116,7 +115,7 @@ int BoxWithChips::getPosEmptyPlace()
 }
 
 
-bool BoxWithChips::toTheLeftChip()
+QPair<bool, int> BoxWithChips::toTheLeftChip()
 {
 	int x = getPosEmptyPlace() % getXNum();
 	int y = getPosEmptyPlace() / getYNum();
@@ -124,11 +123,11 @@ bool BoxWithChips::toTheLeftChip()
 	{
 		*(boxWithChips + (y * getXNum()) + x) = *(boxWithChips + (y * getXNum()) + x + 1);
 		*(boxWithChips + (y * getXNum()) + x + 1) = 0;
-		return true;
+        return QPair<bool, int>(true, *(boxWithChips + (y * getXNum()) + x));
 	}
 	else
 	{
-		return false;
+        return QPair<bool, int>(false, 0);
 	}
 }
 
@@ -167,7 +166,7 @@ bool BoxWithChips::toTheUpChip()
 }
 
 
-bool BoxWithChips::toTheBottomChip()
+bool BoxWithChips::toTheDownChip()
 {
 	int x = getPosEmptyPlace() % getXNum();
 	int y = getPosEmptyPlace() / getYNum();

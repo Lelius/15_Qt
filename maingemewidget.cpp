@@ -4,12 +4,17 @@
 
 #include <QGraphicsPixmapItem>
 #include <QMouseEvent>
+#include <QPair>
+#include <QPointF>
 
 MainGameWidget::MainGameWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainGemeWidget)
 {
     ui->setupUi(this);
+
+    timerWellToggle = new QTimer(this);
+    timerWellToggle->setInterval(500);
 
     scene = new QGraphicsScene(this);
     boxWithChips = new BoxWithChips(4);
@@ -25,6 +30,8 @@ MainGameWidget::MainGameWidget(QWidget *parent)
     KeyPressFilter *keyPressFilter = new KeyPressFilter(ui->graphicsView);
     ui->graphicsView->installEventFilter(keyPressFilter);
     connect(keyPressFilter, &KeyPressFilter::keyPressSignal, this, &MainGameWidget::keyPressFilter);
+
+    connect(timerWellToggle, &QTimer::timeout, this, &MainGameWidget::wellPicturesToggle);
 }
 
 MainGameWidget::~MainGameWidget()
@@ -47,7 +54,7 @@ void MainGameWidget::keyPressFilter(int key)
         boxWithChips->toTheUpChip();
         break;
     case Qt::Key_Down:
-        boxWithChips->toTheBottomChip();
+        boxWithChips->toTheDownChip();
         break;
     case Qt::Key_Space:
         startNewGameScene();
@@ -70,7 +77,10 @@ void MainGameWidget::keyPressFilter(int key)
 
 void MainGameWidget::keyPressEvent(QKeyEvent *event)
 {
-
+    if (event->key() == Qt::Key_F2){
+        boxWithChips->buildInOrderChips();
+    }
+    setOffsetChipsItems();
 }
 
 
@@ -100,7 +110,7 @@ void MainGameWidget::mousePressEvent(QMouseEvent *event)
                     boxWithChips->toTheUpChip();
                 }
                 if (posEmpty == (posChip + boxWithChips->getXNum())){
-                    boxWithChips->toTheBottomChip();
+                    boxWithChips->toTheDownChip();
                 }
             }
         }
@@ -114,6 +124,9 @@ void MainGameWidget::startNewGameScene()
     setOffsetMainItems();
     boxWithChips->randomChips();
     setOffsetChipsItems();
+
+    timerWellToggle->stop();
+    chipsShowToggle(true);
     pixmapItems["wellBlack"]->hide();
     pixmapItems["wellWhite"]->hide();
 }
@@ -121,6 +134,19 @@ void MainGameWidget::startNewGameScene()
 
 void MainGameWidget::setOffsetChipsItems()
 {
+
+    if (boxWithChips->isMatchingChips()){
+        timerWellToggle->start();
+        chipsShowToggle(false);
+        pixmapItems["wellBlack"]->show();
+        pixmapItems["wellWhite"]->hide();
+    }
+    else {
+        timerWellToggle->stop();
+        chipsShowToggle(true);
+        pixmapItems["wellBlack"]->hide();
+        pixmapItems["wellWhite"]->hide();
+    }
     for (int j = 0; j < boxWithChips->getYNum(); j++){
         for (int i = 0; i < boxWithChips->getXNum(); i++){
             int numberChip = boxWithChips->getBoxWithChips()[i + (j * boxWithChips->getXNum())];
@@ -129,6 +155,30 @@ void MainGameWidget::setOffsetChipsItems()
             QString nameItem = QString::number(numberChip) + "_chip";
             pixmapItems[nameItem]->setOffset(QPointF((qreal) 15 + (105 * i), (qreal) 15 + (105 * j)));
         }
+    }
+}
+
+
+void MainGameWidget::wellPicturesToggle()
+{
+    if (pixmapItems["wellBlack"]->isVisible()){
+        pixmapItems["wellBlack"]->hide();
+        pixmapItems["wellWhite"]->show();
+    } else {
+        pixmapItems["wellBlack"]->show();
+        pixmapItems["wellWhite"]->hide();
+    }
+}
+
+
+void MainGameWidget::chipsShowToggle(bool isShow)
+{
+    for (int i = 1; i < boxWithChips->getSizeBox(); i++){
+        QString chip = QString::number(i) + "_chip";
+        if (isShow)
+            pixmapItems[chip]->show();
+        else
+            pixmapItems[chip]->hide();
     }
 }
 

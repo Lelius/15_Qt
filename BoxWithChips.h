@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <time.h>
 
+#include <QPair>
+
 class BoxWithChips {
 public:
   BoxWithChips();
@@ -22,10 +24,10 @@ public:
   bool isMatchingChips();
   int getPosChip(int);
   int getPosEmptyPlace();
-  bool toTheLeftChip();
+  QPair<bool, int>  toTheLeftChip();
   bool toTheRightChip();
   bool toTheUpChip();
-  bool toTheBottomChip();
+  bool toTheDownChip();
   void buildInOrderChips();
   int getChipTheGlobalNumber(int);
 
